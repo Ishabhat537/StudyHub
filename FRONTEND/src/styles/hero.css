@@ -1,0 +1,40 @@
+.hero_img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.hero-text {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 20px 0;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+@media (max-width: 992px) {
+    .hero-text {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .hero_img {
+        max-width: 380px;
+        margin-top: 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero-text {
+        font-size: 2.3rem;
+        text-align: center;
+    }
+
+    .hero_img {
+        max-width: 300px;
+        margin-top: 25px;
+    }
+}

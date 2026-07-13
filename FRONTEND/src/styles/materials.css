@@ -1,0 +1,125 @@
+canvas {
+  border-radius: 10px;
+}
+
+/* CARD */
+
+.card {
+  transition: 0.3s ease;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* PAGE */
+
+.materials-page {
+  width: 95%;
+  margin: 30px auto;
+  padding: 30px 50px;
+  background: #f5f7fb;
+
+}
+
+/* HEADING */
+
+.main-heading {
+  font-size: 38px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sub-heading {
+  color: gray;
+  margin-bottom: 35px;
+  font-size: 17px;
+  text-align: center;
+}
+
+/* SEARCH BAR */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+
+}
+
+.search-bar input {
+  width: 400px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+  outline: none;
+  background: white;
+}
+
+.search-bar input:focus {
+  border-color: #2563eb;
+}
+
+.search-bar button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-bar button:hover {
+  transform: scale(1.03);
+}
+
+/* FILTERS */
+
+.filters-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+
+}
+
+.filters-section select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  min-width: 190px;
+  background: white;
+  cursor: pointer;
+}
+
+.filters-section select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+/* CLEAR BUTTON */
+
+.clear-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.clear-btn:hover {
+  transform: scale(1.03);
+}

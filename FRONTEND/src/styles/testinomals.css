@@ -1,0 +1,17 @@
+.testimonial-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    transition:0.3s;
+    height:100%;
+}
+
+.testimonial-card:hover{
+    transform:translateY(-8px);
+}
+
+.testimonial-card h5{
+    margin-top:20px;
+    margin-bottom:5px;
+}
