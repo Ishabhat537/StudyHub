@@ -4,6 +4,7 @@ import { useState } from "react";
 import  Login  from "../pages/Login";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import API from '../config';
 function UploadMaterial() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +20,7 @@ function UploadMaterial() {
   useEffect(()=>{
     const checkUser=async()=>{
       try{
-          const response=await axios.get("http://localhost:3000/verify",{
+          const response=await axios.get(`${API}/verify`,{
     withCredentials:true
   });
   setUser(response.data.user);
@@ -50,7 +51,7 @@ function UploadMaterial() {
       formData.append("file", file);
 
       const response = await axios.post(
-        "http://localhost:3000/upload",
+        `${API}/upload`,
         formData,
         {withCredentials:true}
       );

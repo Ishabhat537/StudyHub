@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MaterialCard from "../components/MaterialCard";
 import { useSearchParams } from "react-router-dom";
+import API from '../config';
 
 
 function Materials() {
@@ -42,7 +43,7 @@ const [year, setYear] = useState(
         await Promise.all([
 
           axios.get(
-            "http://localhost:3000/materials",
+            `${API}/materials`,
             {
               params: {
                 search,
@@ -57,7 +58,7 @@ const [year, setYear] = useState(
           ),
 
           axios.get(
-            "http://localhost:3000/verify",
+            `${API}/verify`,
             {
               withCredentials: true,
             }

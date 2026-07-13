@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import MaterialCard from "../components/MaterialCard";
+import API from '../config';
 
 function MyUploads() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function MyUploads() {
   useEffect(() => {
     const fetchUploads = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/myuploads", {
+        const res = await axios.get(`${API}/myuploads`, {
           withCredentials: true,
         });
 
@@ -28,7 +29,7 @@ function MyUploads() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/verify", {
+        const response = await axios.get(`${API}/verify`, {
           withCredentials: true,
         });
         setUser(response.data.user);
@@ -41,7 +42,7 @@ function MyUploads() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/materials/${id}`, {
+      await axios.delete(`${API}/materials/${id}`, {
         withCredentials: true,
       });
 

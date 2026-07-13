@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import { Document, Page, pdfjs } from "react-pdf";
+import API from '../config';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -18,7 +19,7 @@ function ViewMaterial() {
   useEffect(() => {
     const fetchMaterial = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/materials/${id}`);
+        const res = await axios.get(`${API}/materials/${id}`);
 
         setMaterial(res.data.material);
       } catch (err) {

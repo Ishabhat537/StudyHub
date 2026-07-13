@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 import "../styles/auth.css"
+import API from '../config';
 function Signup() {
 
         const navigate=useNavigate();
@@ -36,7 +37,7 @@ function Signup() {
         const handleSubmit=async(e)=>{
             e.preventDefault();
             try{
-                const {data}=await axios.post("http://localhost:3000/signup",{
+                const {data}=await axios.post(`${API}/signup`,{
                     ...inputValue,
                 },
                 {withCredentials:true}

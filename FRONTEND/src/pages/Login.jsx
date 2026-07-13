@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 import "../styles/auth.css"
+import API from '../config';
 function Login() {
 
         const navigate=useNavigate();
@@ -35,7 +36,7 @@ function Login() {
         const handleSubmit=async(e)=>{
             e.preventDefault();
             try{
-                const {data}=await axios.post("http://localhost:3000/login",{
+                const {data}=await axios.post(`${API}/login`,{
                     ...inputValue,
                 },
                 {withCredentials:true}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import API from '../config';
 import axios from 'axios';
 function EditMaterial() {
     const {id}=useParams();
@@ -17,7 +18,7 @@ function EditMaterial() {
     useEffect(()=>{
         const fetchMaterial=async()=>{
             try{
-               const res= await axios.get( `http://localhost:3000/materials/${id}`,{
+               const res= await axios.get( `${API}/materials/${id}`,{
                    withCredentials:true,
                 });
                 console.log(res.data);
@@ -53,7 +54,7 @@ function EditMaterial() {
       }
 
         await axios.put(
-        `http://localhost:3000/materials/${id}`,
+        `${API}/materials/${id}`,
         formData,
         {
           withCredentials: true,

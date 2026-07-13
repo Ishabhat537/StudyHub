@@ -4,10 +4,12 @@ import { Document, Page, pdfjs } from "react-pdf";
 import "../styles/materials.css";
 import { FaHeart, FaRegHeart ,FaEye,FaDownload} from "react-icons/fa";
 import axios from "axios";
+import API from '../config';
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url,
 ).toString();
+
 
 function MaterialCard({ material, showActions, onEdit, onDelete, userId,viewCount }) {
   // const [liked, setLiked] = useState(false);
@@ -45,7 +47,7 @@ function MaterialCard({ material, showActions, onEdit, onDelete, userId,viewCoun
   const handleFavourite = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/favourite/${material._id}`,
+        `${API}/favourite/${material._id}`,
         {},
         {
           withCredentials: true,
@@ -61,7 +63,7 @@ function MaterialCard({ material, showActions, onEdit, onDelete, userId,viewCoun
   const handleDownload=async()=>{
     try{
       const res=await axios.get(
-        `http://localhost:3000/download/${material._id}`,
+        `${API}/download/${material._id}`,
         
 
       );
