@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 import MyUploads from "./pages/MyUploads";
 import EditMaterial from "./pages/EditMaterial";
 import ViewMaterial from "./pages/ViewMaterial";
-import { VerifyOtp } from "./pages/VerifyOtp";
+import  VerifyOtp  from "./pages/VerifyOtp";
 
 
 function App() {
