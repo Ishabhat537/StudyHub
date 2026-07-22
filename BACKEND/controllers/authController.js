@@ -1,4 +1,4 @@
-const { transporter } = require("../config/mailer");
+const  transporter  = require("../config/mailer");
 const OtpModel = require("../models/OtpModel");
 
 const User = require("../models/UserModel");
@@ -119,15 +119,14 @@ module.exports.SendOtp=async(req,res)=>{
       message:"OTP sent successfully!",
     });
 
-  }catch(err){
-    console.log(err);
+  }catch (err) {
+  console.log("SendOtp Error:", err);
 
-    return res.json({
-      success:false,
-      message:"Something went wrong!",
-    });
-
-  }
+  return res.status(500).json({
+    success: false,
+    message: err.message,
+  });
+}
 }
 
 module.exports.VerifyOtp = async (req, res) => {
@@ -141,7 +140,7 @@ module.exports.VerifyOtp = async (req, res) => {
       });
     }
 
-    const otpData = await Otp.findOne({ email });
+    const otpData = await OtpModel.findOne({ email });
 
     if (!otpData) {
       return res.json({
@@ -166,7 +165,7 @@ module.exports.VerifyOtp = async (req, res) => {
     });
 
     // Delete OTP
-    await Otp.deleteOne({ email });
+    await OtpModel.deleteOne({ email });
 
     // Generate JWT
     const token = createSecretToken(user._id);
