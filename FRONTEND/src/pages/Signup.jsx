@@ -51,10 +51,21 @@ function Signup() {
       email,
     },
   });
+}else{
+    handleError(message);
 }
 
             }catch(err){
                 console.log(err);
+                  if (err.response) {
+    console.log("Status:", err.response.status);
+    console.log("Data:", err.response.data);
+
+    handleError(err.response.data.message);
+  } else {
+    console.log(err.message);
+    handleError(err.message);
+  }
 
             }
             setInputValue({
