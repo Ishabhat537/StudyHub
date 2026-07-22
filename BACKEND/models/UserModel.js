@@ -16,6 +16,10 @@ const UserSchema=mongoose.Schema({
     createdAt:{
         type:Date,
         default:new Date(),
+    },
+        isVerified:{
+            type:Boolean,
+            default:false
     }
 });
 

@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import MyUploads from "./pages/MyUploads";
 import EditMaterial from "./pages/EditMaterial";
 import ViewMaterial from "./pages/ViewMaterial";
+import { VerifyOtp } from "./pages/VerifyOtp";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
            <Route path="/myuploads" element={<MyUploads/>} />
            <Route path="/edit/:id" element={<EditMaterial/>} />
            <Route path="/view/:id" element={<ViewMaterial/>}/>
+           <Route path="/verify-otp" element={<VerifyOtp/>} />
       </Routes>
       <Footer/>
     </>

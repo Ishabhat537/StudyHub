@@ -37,20 +37,21 @@ function Signup() {
         const handleSubmit=async(e)=>{
             e.preventDefault();
             try{
-                const {data}=await axios.post(`${API}/signup`,{
+                const {data}=await axios.post(`${API}/send-otp`,{
                     ...inputValue,
                 },
                 {withCredentials:true}
             );
             const {success,message}=data;
-            if(success){
-                handleSuccess(message);
-                setTimeout(()=>{
-                    navigate("/");
-                },1000);
-            }else{
-                handleError(message);
-            }
+           if (success) {
+  handleSuccess(message);
+
+  navigate("/verify-otp", {
+    state: {
+      email,
+    },
+  });
+}
 
             }catch(err){
                 console.log(err);
