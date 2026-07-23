@@ -123,3 +123,368 @@ canvas {
 .clear-btn:hover {
   transform: scale(1.03);
 }
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   MATERIAL CARD
+========================= */
+
+.material-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+
+  display: flex;
+  gap: 18px;
+
+  min-height: 210px;
+  height: 100%;
+
+  transition: transform 0.2s ease, 
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.material-card:hover {
+  transform: translateY(-3px);
+  border-color: #d6e0ee;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================
+   PDF PREVIEW
+========================= */
+
+.material-preview {
+  width: 115px;
+  height: 155px;
+
+  flex-shrink: 0;
+  overflow: hidden;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  display: block;
+}
+
+.material-preview canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.material-content {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.material-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+
+/* Material Type - PYQ / Notes etc */
+
+.material-type {
+  display: inline-block;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  padding: 4px 9px;
+  border-radius: 20px;
+
+  margin-bottom: 7px;
+}
+
+
+/* Title */
+
+.material-title {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+
+/* =========================
+   FAVOURITE
+========================= */
+
+.favourite-btn {
+  border: none;
+  background: transparent;
+
+  padding: 4px;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+.favourite-btn:hover {
+  transform: scale(1.1);
+}
+
+.liked-heart {
+  color: #ef4444;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.material-description {
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  margin: 8px 0 10px;
+}
+
+
+/* =========================
+   TAGS
+========================= */
+
+.material-tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.material-tags span {
+  background: #f1f5f9;
+  color: #475569;
+
+  padding: 4px 9px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+
+/* =========================
+   CARD BOTTOM
+========================= */
+
+.material-footer {
+  margin-top: auto;
+  padding-top: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* uploader + views + download */
+
+.material-meta {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.material-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.uploader {
+  color: #475569;
+  font-weight: 500;
+}
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+.download-btn {
+  border: none;
+  background: transparent;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  padding: 4px;
+
+  display: flex;
+  align-items: center;
+
+  transition: color 0.15s ease;
+}
+
+.download-btn:hover {
+  color: #2563eb;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.material-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+/* View */
+
+.view-material-btn {
+  background: #2563eb;
+  color: #ffffff;
+
+  padding: 7px 14px;
+
+  border-radius: 7px;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: background 0.15s ease;
+}
+
+.view-material-btn:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+
+/* Edit + Delete */
+
+.edit-btn,
+.delete-btn {
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  padding: 6px 10px;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.edit-btn {
+  color: #475569;
+}
+
+.edit-btn:hover {
+  background: #f8fafc;
+}
+
+.delete-btn {
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+  .material-card {
+    padding: 14px;
+    gap: 13px;
+    min-height: 175px;
+  }
+
+  .material-preview {
+    width: 85px;
+    height: 120px;
+  }
+
+  .material-title {
+    font-size: 15px;
+  }
+
+  .material-description {
+    display: none;
+  }
+
+  .material-tags {
+    gap: 5px;
+  }
+
+  .material-tags span {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .material-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .material-meta {
+    gap: 9px;
+  }
+}
