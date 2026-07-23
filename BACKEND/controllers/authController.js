@@ -1,5 +1,6 @@
-const  transporter  = require("../config/mailer");
+
 const OtpModel = require("../models/OtpModel");
+const resend = require("../config/resend");
 
 const User = require("../models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
@@ -198,18 +199,27 @@ module.exports.SendOtp = async (req, res) => {
     // 6. Send email
     console.time("SEND EMAIL");
 
-    const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "StudyHub Email Verification",
-      text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
-    });
+    const { data, error } = await resend.emails.send({
+  from: "StudyHub <onboarding@resend.dev>",
+  to: email,
+  subject: "StudyHub Email Verification",
+  text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
+});
+
+if (error) {
+  console.log("Resend Error:", error);
+
+  return res.status(500).json({
+    success: false,
+    message: "Failed to send OTP email.",
+  });
+}
+
+console.log("Email sent:", data);
 
     console.timeEnd("SEND EMAIL");
 
-    console.log("Accepted:", info.accepted);
-    console.log("Rejected:", info.rejected);
-
+   
     console.timeEnd("TOTAL SEND OTP");
 
     return res.json({
