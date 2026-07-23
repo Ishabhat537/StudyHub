@@ -81,91 +81,122 @@ function MaterialCard({ material, showActions, onEdit, onDelete, userId,viewCoun
 
     };
   }
-  return(<>
+  return(
 
-<div className="card border-0 rounded-4 shadow-sm h-100 p-3">
-  <div className="d-flex align-items-start gap-3">
+  <div className="material-card">
 
-    <Link to={`/view/${material._id}`}>
-      <div
-        className="overflow-hidden rounded-3 border"
-        style={{
-          width: "100px",
-          height: "130px",
-          background: "#f8f9fa",
-          flexShrink: 0,
-        }}
-      >
-      {console.log("PDF URL:", material.fileUrl)}
-        <Document file={material.fileUrl}>
-          <Page
-            pageNumber={1}
-            width={100}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-          />
-        </Document>
-      </div>
+    {/* PDF Preview */}
+    <Link
+      to={`/view/${material._id}`}
+      className="material-preview"
+    >
+      <Document file={material.fileUrl}>
+        <Page
+          pageNumber={1}
+          width={115}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+        />
+      </Document>
     </Link>
 
-    <div className="flex-grow-1">
+    {/* Material Information */}
+    <div className="material-content">
 
-      <div className="d-flex justify-content-between">
-        <h5 className="fw-bold mb-2">
-          {material.title}
-        </h5>
+      <div className="material-card-header">
+        <div>
+          <span className="material-type">
+            {material.type || "Study Material"}
+          </span>
 
-        <div onClick={handleFavourite} style={{ cursor: "pointer" }}>
-          {liked ? (
-            <FaHeart size={20} color="#dc3545" />
-          ) : (
-            <FaRegHeart size={20} />
-          )}
+          <h5 className="material-title">
+            {material.title}
+          </h5>
         </div>
+
+        <button
+          className="favourite-btn"
+          onClick={handleFavourite}
+          aria-label="Add to favourites"
+        >
+          {liked ? (
+            <FaHeart size={19} className="liked-heart" />
+          ) : (
+            <FaRegHeart size={19} />
+          )}
+        </button>
       </div>
 
-      <p className="text-muted small mb-2">
-        {material.description?.slice(0, 60)}
+      <p className="material-description">
+        {material.description?.slice(0, 75)}
+        {material.description?.length > 75 && "..."}
       </p>
 
-      <div className="small mb-1">
-        📘 {material.subject}
+      {/* Tags */}
+      <div className="material-tags">
+        <span>{material.subject}</span>
+        <span>Semester {material.semester}</span>
+
+        {material.year && (
+          <span>{material.year}</span>
+        )}
       </div>
 
-      <div className="small mb-1">
-        🎓 Semester {material.semester}
+      {/* Bottom */}
+      <div className="material-footer">
+
+        <div className="material-meta">
+          <span className="uploader">
+            @{material.uploadedBy?.username || "student"}
+          </span>
+
+          <span>
+            <FaEye /> {material.viewCount || 0}
+          </span>
+
+          <button
+            className="download-btn"
+            onClick={handleDownload}
+            title="Download"
+          >
+            <FaDownload />
+          </button>
+        </div>
+
+        <div className="material-actions">
+
+          {showActions && (
+            <>
+              <button
+                onClick={onEdit}
+                className="edit-btn"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={onDelete}
+                className="delete-btn"
+              >
+                Delete
+              </button>
+            </>
+          )}
+
+          <Link
+            to={`/view/${material._id}`}
+            className="view-material-btn"
+          >
+            View
+          </Link>
+
+        </div>
+
       </div>
-
-      <div className="small text-secondary mb-2">
-        👤 @{material.uploadedBy?.username}
-      </div>
-
-      <div className="d-flex justify-content-between align-items-center mt-2">
-        <span className="text-secondary">
-          <FaEye /> {material.viewCount || 0}
-        </span>
-        <span className="text-secondary" onClick={handleDownload}>
-          <FaDownload/> 
-        </span>
-        {showActions && (
-  <>
-    <button onClick={onEdit} className="btn btn-warning btn-sm">Edit</button>
-    <button onClick={onDelete} className="btn btn-danger btn-sm">Delete</button>
-  </>
-)}
-
-        <Link
-          to={`/view/${material._id}`}
-          className="btn btn-primary btn-sm"
-        >
-          View PDF
-        </Link>
-      </div>
-
     </div>
-
   </div>
-</div>
-  </>)
+);
 }
+  
+
 export default MaterialCard;
