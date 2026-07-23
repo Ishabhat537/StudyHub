@@ -143,18 +143,6 @@ module.exports.SendOtp = async (req, res) => {
       });
     }
 
-  if (
-  !email.endsWith("@ldce.ac.in") &&
-  email !== "studyhubteam953@gmail.com"
-) {
-  return res.json({
-    success: false,
-    message: "Only college email addresses are allowed!",
-  });
-}
-
-    // 1. Check user
-    console.time("USER CHECK");
 
     const existingUser = await User.findOne({ email });
 

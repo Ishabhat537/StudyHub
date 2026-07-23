@@ -59,34 +59,7 @@ function ViewMaterial() {
         </Document>
       </div>
 
-      <div className="col-8 gap-4">
-        <h2>Leave a review</h2>
-        <form action="">
-          <label for="rating" className="form-label">Rating</label>
-          <input
-            type="range"
-            min="1"
-            max="5"
-            id="rating"
-            name="review[rating]"
-            className="form-range"
-          />
-          <br />
-
-          <label for="comment" className="form-label">Comment</label> <br />
-          <textarea
-            name="review[comment]"
-            id="comment"
-            cols={30}
-            rows={5}
-              
-            className="form-control"
-          ></textarea>
-          <br />
-
-          <button className="btn btn-outline-dark">Submit</button>
-        </form>
-      </div>
+    
     </div>
   );
 }
