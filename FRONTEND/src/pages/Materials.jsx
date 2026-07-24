@@ -3,7 +3,7 @@ import axios from "axios";
 import MaterialCard from "../components/MaterialCard";
 import { useSearchParams } from "react-router-dom";
 import API from '../config';
-import { FaBook } from "react-icons/fa";
+import { FaBook,FaSearch } from "react-icons/fa";
 
 
 function Materials() {
@@ -143,7 +143,7 @@ const [year, setYear] = useState(
     className="search-btn"
     onClick={fetchData}
   >
-    Search
+   <FaSearch/>
   </button>
 
 </div>
