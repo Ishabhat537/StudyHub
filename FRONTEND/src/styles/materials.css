@@ -445,11 +445,66 @@ canvas {
 
 
 /* =========================
-   RESPONSIVE
+   MOBILE RESPONSIVE
 ========================= */
 
 @media (max-width: 600px) {
 
+  .materials-page {
+    width: 95%;
+    margin: 15px auto;
+    padding: 25px 15px;
+  }
+
+  .main-heading {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+
+  .sub-heading {
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  /* Keep search input + button in same row */
+  .search-bar {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .search-bar input {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .search-bar button {
+    flex-shrink: 0;
+    padding: 11px 16px;
+    font-size: 12px;
+  }
+
+  /* Filters */
+  .filters-section {
+    display: block;
+  }
+
+  .filters-section select {
+    width: 100%;
+    min-width: 0;
+    font-size: 13px;
+  }
+
+  .clear-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  /* Material cards */
   .material-card {
     padding: 14px;
     gap: 13px;
@@ -486,18 +541,11 @@ canvas {
 
   .material-meta {
     gap: 9px;
+    flex-wrap: wrap;
   }
-}
-.clear-filter-btn {
-  background: white;
-  color: #64748b;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 10px 16px;
-  font-weight: 500;
-}
 
-.clear-filter-btn:hover {
-  background: #f8fafc;
-  color: #334155;
+  .view-material-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
 }

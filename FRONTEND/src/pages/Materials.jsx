@@ -3,6 +3,7 @@ import axios from "axios";
 import MaterialCard from "../components/MaterialCard";
 import { useSearchParams } from "react-router-dom";
 import API from '../config';
+import { FaBook } from "react-icons/fa";
 
 
 function Materials() {
@@ -113,7 +114,7 @@ const [year, setYear] = useState(
     <div className="materials-page">
 
   <h1 className="main-heading">
-    📚 Browse Study Materials
+    <FaBook/> Browse Study Materials
   </h1>
 
   <p className="sub-heading">
