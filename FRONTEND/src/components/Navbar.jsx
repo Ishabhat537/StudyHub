@@ -101,7 +101,7 @@ const handleLogout=async()=>{
 
               <li className="nav-item">
   <Link className="nav-link fw-semibold" to="/favourites">
-   <FaHeart color="red"/>
+   My <FaHeart/>
   </Link>
 </li>
 
