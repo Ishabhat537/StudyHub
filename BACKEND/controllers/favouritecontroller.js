@@ -56,3 +56,29 @@ module.exports.toggleFavourite = async (req, res) => {
   }
 
 };
+
+
+module.exports.getFavourites=async(req,res)=>{
+  try{
+    const userId=req.user.id;
+    const materials=await Material.find({
+      favourites:userId,
+
+    }).populate("uploadedBy","username");
+    console.log(materials);
+
+    res.status(200).json(
+      {
+        materials,
+        userId
+      }
+    );
+
+
+  }catch(err){
+    res.status(500).json({
+      message:err.message,
+    });
+
+  }
+}

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import { FaBook, FaFolderOpen, FaHome, FaUpload } from "react-icons/fa";
+import { FaBook, FaFolderOpen, FaHeart, FaHome, FaUpload } from "react-icons/fa";
 function Navbar() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   const navigate=useNavigate();
@@ -59,7 +59,7 @@ const handleLogout=async()=>{
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
         <div className="container-fluid">
           <a className="navbar-brand ml-5" href="/">
            <FaHome/> <img src={studyhub} style={{ height: "3rem", width: "6rem" }}></img>
@@ -99,7 +99,15 @@ const handleLogout=async()=>{
             {isLoggedIn ? (
               <>
 
+              <li className="nav-item">
+  <Link className="nav-link fw-semibold" to="/favourites">
+    <FaHeart /> My Favourites
+  </Link>
+</li>
+
               <div className="ms-lg-auto mt-3 mt-lg-0 d-flex justify-content-center">
+
+              
 
   <button
     className="btn btn-primary rounded-circle profile-btn dropdown-toggle d-flex align-items-center justify-content-center"

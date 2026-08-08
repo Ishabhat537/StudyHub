@@ -9,6 +9,7 @@ const myUploadsRoute=require("./routes/myUploadsRoute");
 const cookieParser = require("cookie-parser");
 const toggleFavouriteRoute  = require("./routes/toggleFavouriteRoute");
 
+
 const app=express();
 
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use("/",authRoute);
 app.use("/",materialRoute);
 app.use("/",myUploadsRoute);
 app.use("/",toggleFavouriteRoute);
+
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("DB connected"))
