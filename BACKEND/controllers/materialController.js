@@ -140,7 +140,7 @@ module.exports.getSingleMaterial = async (req, res) => {
 
 module.exports.filterMaterials = async (req, res) => {
   try {
-    const { search, semester, subject, course, year,type } = req.query;
+    const { search, semester, subject, course, year,type,page=1,limit=6 } = req.query;
 
     const filter = {};
     if (search) {
@@ -188,15 +188,33 @@ module.exports.filterMaterials = async (req, res) => {
     if(type){
       filter.type=type;
     }
-    const materials = await Material.find(filter);
 
+    const pageNumber = Number(page);
+    const limitNumber = Number(limit);
+
+    const skip = (pageNumber - 1) * limitNumber;
+    const materials = await Material.find(filter)
+     .populate("uploadedBy", "username")
+      .populate("favourites", "_id")
+      .skip(skip)
+      .limit(limitNumber);
+      const total = await Material.countDocuments(filter);
+  
+   //calculate total pages
+
+    const totalPages = Math.ceil(total / limitNumber);
     res.status(200).json({
+      success: true,
       materials,
+      total,
+      totalPages,
+      currentPage: pageNumber,
     });
   } catch (err) {
     console.log(err);
 
     res.status(500).json({
+      success:false,
       message: "Server Error",
     });
   }

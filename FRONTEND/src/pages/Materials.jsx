@@ -11,6 +11,10 @@ function Materials() {
   const [materials, setMaterials] = useState([]);
 const [user, setUser] = useState(null);
 const [loading, setLoading] = useState(true);
+const [page, setPage] = useState(1);
+const [totalPages, setTotalPages] = useState(1);
+
+const limit = 6;
 const [search, setSearch] = useState("");
   const [searchParams] = useSearchParams();
 
@@ -53,7 +57,9 @@ const [year, setYear] = useState(
                 course,
                
                 year,
-                type
+                type,
+                page,
+                limit
               },
             }
           ),
@@ -68,6 +74,7 @@ const [year, setYear] = useState(
         ]);
 
       setMaterials(materialsRes.data.materials);
+      setTotalPages(materialsRes.data.totalPages);
 
       setUser(userRes.data.user);
       console.log("user :",user);
@@ -90,7 +97,7 @@ const [year, setYear] = useState(
 
     fetchData();
 
-  }, [search,semester,subject,course,type,year]);
+  }, [page,search,semester,subject,course,type,year]);
 
   const clearFilters=async()=>{
    setSearch("");
@@ -99,6 +106,7 @@ const [year, setYear] = useState(
   setCourse("");
   setType("");
   setYear("");
+  setPage(1);
 
   }
 
@@ -134,7 +142,7 @@ const [year, setYear] = useState(
     type="text"
     placeholder="Search notes..."
     value={search}
-    onChange={(e) => setSearch(e.target.value)}
+    onChange={(e) =>{ setSearch(e.target.value); setPage(1);}}
     className="search-input"
   />
 
@@ -153,7 +161,7 @@ const [year, setYear] = useState(
  <div className="col-lg col-md-4 col-12">
       <select
         value={semester}
-        onChange={(e) => setSemester(e.target.value)}
+        onChange={(e) => {setSemester(e.target.value); setPage(1);}}
         className="form-select"
       >
         <option value="">All Semesters</option>
@@ -171,7 +179,7 @@ const [year, setYear] = useState(
 <div className="col-lg col-md-4 col-12">
       <select
         value={subject}
-        onChange={(e) => setSubject(e.target.value)}
+        onChange={(e) => {setSubject(e.target.value); setPage(1);}}
             className="form-select"
       >
         <option value="">All Subjects</option>
@@ -208,7 +216,7 @@ const [year, setYear] = useState(
 <div className="col-lg col-md-4 col-12">
       <select
         value={course}
-        onChange={(e) => setCourse(e.target.value)}
+        onChange={(e) => {setCourse(e.target.value); setPage(1);}}
             className="form-select"
       >
         <option value="">All Courses</option>
@@ -218,7 +226,7 @@ const [year, setYear] = useState(
 <div className="col-lg col-md-4 col-12">
       <select
         value={type}
-        onChange={(e) => setType(e.target.value)}
+        onChange={(e) => {setType(e.target.value); setPage(1);}}
             className="form-select"
       >
         <option value="">All Types</option>
@@ -230,7 +238,7 @@ const [year, setYear] = useState(
 <div className="col-lg col-md-4 col-12">
       <select
         value={year}
-        onChange={(e) => setYear(e.target.value)}
+        onChange={(e) =>{ setYear(e.target.value); setPage(1);}}
             className="form-select"
       >
         <option value="">All Years</option>
@@ -306,21 +314,40 @@ const [year, setYear] = useState(
 
 </div>
 
-    {materials.map((material) => (
+     {materials.map((material) => (
+    <div
+      className="col-lg-4 col-md-6 col-12"
+      key={material._id}
+    >
+      <MaterialCard
+        material={material}
+        userId={user?._id}
+      />
+    </div>
+  ))}
 
-      <div className="col-lg-4 col-md-6 col-12"
-      
-        key={material._id}
-      >
+  {/* PAGINATION */}
+  <div className="d-flex justify-content-center align-items-center gap-3 mt-5">
 
-        <MaterialCard
-          material={material}
-          userId={user?._id}
-        />
+    <button
+      className="btn btn-outline-primary"
+      disabled={page === 1}
+      onClick={() => setPage(page - 1)}
+    >
+      Previous
+    </button>
+     <span>
+      Page {page} of {totalPages}
+    </span>
 
-      </div>
-
-    ))}
+    <button
+      className="btn btn-primary"
+      disabled={page === totalPages}
+      onClick={() => setPage(page + 1)}
+    >
+      Next
+    </button>
+</div>
 
   </div>
   )}
