@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
-import  Login  from "../pages/Login";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from '../config';
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+
+
 function UploadMaterial() {
+const {user,loading}=useContext(AuthContext);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [subject, setSubject] = useState("");
@@ -14,27 +17,7 @@ function UploadMaterial() {
   const [course,setCourse]=useState("");
   const [type,setType]=useState("");
   const [year,setYear]=useState("");
-  const [user,setUser]=useState(null);
-  const [loading,setLoading]=useState(true);
-
-  useEffect(()=>{
-    const checkUser=async()=>{
-      try{
-          const response=await axios.get(`${API}/verify`,{
-    withCredentials:true
-  });
-  setUser(response.data.user);
-
-
-      }catch(err){
-        console.log(err);
-
-      }finally{
-        setLoading(false);
-      }
-    }
-    checkUser();
-  },[]);
+ 
 
 
   const handleSubmit = async (e) => {

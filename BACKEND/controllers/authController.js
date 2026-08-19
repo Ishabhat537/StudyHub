@@ -6,43 +6,43 @@ const User = require("../models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
-module.exports.Signup = async (req, res) => {
-  try {
+// module.exports.Signup = async (req, res) => {
+//   try {
 
-    const { email, username, password, createdAt } = req.body;
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.json({ success:false,message: "User already exists!" });
-    }
+//     const { email, username, password, createdAt } = req.body;
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.json({ success:false,message: "User already exists!" });
+//     }
 
-    if(!email || !username || !password){
-   return res.json({
-      success:false,
-      message:"All fields are required!"
-   });
-}
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      email,
-      username,
-      password: hashedPassword,
-      createdAt,
-    });
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-       httpOnly: true,
-  secure: true,
-  sameSite: "None",
-    });
+//     if(!email || !username || !password){
+//    return res.json({
+//       success:false,
+//       message:"All fields are required!"
+//    });
+// }
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const user = await User.create({
+//       email,
+//       username,
+//       password: hashedPassword,
+//       createdAt,
+//     });
+//     const token = createSecretToken(user._id);
+//     res.cookie("token", token, {
+//        httpOnly: true,
+//   secure: true,
+//   sameSite: "None",
+//     });
 
        
-    res
-      .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     res
+//       .status(201)
+//       .json({ message: "User signed in successfully", success: true, user });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 module.exports.Login = async (req, res) => {
   try {
@@ -155,26 +155,26 @@ module.exports.SendOtp = async (req, res) => {
       });
     }
 
-    // 2. Delete old OTP
+    //  Delete old OTP
     console.time("DELETE OTP");
 
     await OtpModel.deleteMany({ email });
 
     console.timeEnd("DELETE OTP");
 
-    // 3. Hash password
+    //  Hash password
     console.time("BCRYPT");
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     console.timeEnd("BCRYPT");
 
-    // 4. Generate OTP
+    //  Generate OTP
     const otp = Math.floor(
       100000 + Math.random() * 900000
     ).toString();
 
-    // 5. Save OTP
+    //  Save OTP
     console.time("SAVE OTP");
 
     await OtpModel.create({
@@ -187,7 +187,7 @@ module.exports.SendOtp = async (req, res) => {
 
     console.timeEnd("SAVE OTP");
 
-    // 6. Send email
+    //  Send email
     console.time("SEND EMAIL");
 
     const { data, error } = await resend.emails.send({
@@ -248,7 +248,16 @@ module.exports.VerifyOtp = async (req, res) => {
       });
     }
 
-    if (otpData.otp !== otp) {
+  
+    if (otpData.expiresAt < new Date()) {
+  await OtpModel.deleteOne({ email });
+
+  return res.json({
+    success: false,
+    message: "OTP expired!",
+  });
+}
+ if (otpData.otp !== otp) {
       return res.json({
         success: false,
         message: "Incorrect OTP!",

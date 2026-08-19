@@ -15,6 +15,7 @@ function ViewMaterial() {
 
   const [material, setMaterial] = useState(null);
   const [numPages, setNumPages] = useState(0);
+  const [pageNumber,setPageNumber]=useState(1);
 
   useEffect(() => {
     const fetchMaterial = async () => {
@@ -32,6 +33,7 @@ function ViewMaterial() {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
+    setPageNumber(1);
   };
 
   if (!material) {
@@ -47,16 +49,35 @@ function ViewMaterial() {
           file={{ url: material.fileUrl }}
           onLoadSuccess={onDocumentLoadSuccess}
         >
-          {Array.from({ length: numPages }, (_, index) => (
-            <Page
-              key={index}
-              pageNumber={index + 1}
-              width={800}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          ))}
+           <Page
+    pageNumber={pageNumber}
+    width={800}
+    renderTextLayer={false}
+    renderAnnotationLayer={false}
+  />
+
+         
         </Document>
+
+        <div className="d-flex align-items-center gap-3 mt-3">
+          <button className="btn btn-outline-primary"
+          disabled={pageNumber===1}
+          onClick={()=>setPageNumber(pageNumber-1)}>
+            Previous
+          </button>
+
+           <span>
+    Page {pageNumber} of {numPages}
+  </span>
+
+  <button
+    className="btn btn-primary"
+    disabled={pageNumber === numPages}
+    onClick={() => setPageNumber(pageNumber + 1)}
+  >
+    Next
+  </button>
+        </div>
       </div>
 
     

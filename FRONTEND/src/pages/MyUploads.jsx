@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import MaterialCard from "../components/MaterialCard";
 import API from '../config';
+import { AuthContext } from "../context/AuthContext";
 
 function MyUploads() {
+  const {user,loading}=useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const [materials, setMaterials] = useState([]);
-  const [user, setUser] = useState();
+
 
   useEffect(() => {
+    if(!loading && user){
     const fetchUploads = async () => {
       try {
         const res = await axios.get(`${API}/myuploads`, {
@@ -21,24 +25,18 @@ function MyUploads() {
       } catch (err) {
         console.log(err);
       }
+    
     };
 
     fetchUploads();
-  }, []);
+  }
+  }, [loading,user]);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${API}/verify`, {
-          withCredentials: true,
-        });
-        setUser(response.data.user);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchUser();
-  }, []);
+    if(loading){
+   return (<h2>loading...</h2>);
+ }
+
+ 
 
   const handleDelete = async (id) => {
     try {

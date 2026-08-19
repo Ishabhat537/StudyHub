@@ -1,4 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import {
+  FaDatabase,
+  FaLaptopCode,
+  FaNetworkWired,
+  FaJava,
+  FaPython,
+  FaRobot,
+  FaCogs
+} from "react-icons/fa";
+
+import { MdDataObject } from "react-icons/md";
 
 function SubjectSection() {
   const navigate = useNavigate();
@@ -6,35 +17,35 @@ function SubjectSection() {
   const subjects = [
     {
       name: "Data Structures",
-      icon: "🧩",
+      icon: <MdDataObject/>,
     },
     {
       name: "DBMS",
-      icon: "🗄️",
+      icon: <FaDatabase/>,
     },
     {
       name: "Operating System",
-      icon: "💻",
+      icon: <FaLaptopCode/>,
     },
     {
       name: "Computer Networks",
-      icon: "🌐",
+      icon: <FaNetworkWired/>,
     },
     {
       name: "Software Engineering",
-      icon: "⚙️",
+      icon: <FaCogs/>,
     },
     {
       name: "Java",
-      icon: "☕",
+      icon: <FaJava/>,
     },
     {
       name: "Python",
-      icon: "🐍",
+      icon: <FaPython/>,
     },
     {
       name: "Artificial Intelligence",
-      icon: "🤖",
+      icon: <FaRobot/>,
     },
   ];
 
