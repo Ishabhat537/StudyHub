@@ -1,3 +1,5 @@
 body {
- background-color: rgb(182, 213, 255);
+  margin: 0;
+  background-color: #f5f7fa !important;
+  color: #111827;
 }
