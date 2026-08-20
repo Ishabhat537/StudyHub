@@ -4,8 +4,8 @@ function StudyHub() {
     <>
       <div className="container py-5">
         <div className="text-center mb-5">
-          <p className="text-primary fw-bold">WHY ACADELY</p>
-          <h2 className="fw-bold display-5">Why Choose ACADELY?</h2>
+          <p className="text-primary fw-bold">WHY ACADEX</p>
+          <h2 className="fw-bold display-5">Why Choose ACADEX?</h2>
         </div>
 
         <div className="row g-4">

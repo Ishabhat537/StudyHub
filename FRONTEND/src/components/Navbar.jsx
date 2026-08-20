@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import studyhub from "../assets/studyhub.png";
+import logo from "../assets/logo.png";
 import "../styles/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -62,7 +62,7 @@ const handleLogout=async()=>{
       <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
         <div className="container-fluid">
           <a className="navbar-brand ml-5" href="/">
-           <FaHome/> <img src={studyhub} style={{ height: "3rem", width: "6rem" }}></img>
+           <FaHome/> <img src={logo} style={{ height: "3rem", width: "6rem" }}></img>
           </a>
 <button
   className="navbar-toggler"
