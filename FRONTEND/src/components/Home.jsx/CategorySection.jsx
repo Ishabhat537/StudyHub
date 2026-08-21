@@ -52,7 +52,7 @@ function CategorySection() {
                 transition: "0.3s",
               }}
               onClick={() =>
-                navigate(handleCategoryClick(category.type))
+                handleCategoryClick(category.type)
               }
             >
               <h1>{category.icon}</h1>
