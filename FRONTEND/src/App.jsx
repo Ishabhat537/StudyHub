@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import MyUploads from "./pages/MyUploads";
 import EditMaterial from "./pages/EditMaterial";
 import ViewMaterial from "./pages/ViewMaterial";
+import ChooseSemester from "./pages/ChooseSemester";
 
 import Favourites from "./pages/Favourites";
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/upload" element={<UploadMaterial />} />
          <Route path="/materials" element={<Materials />} />
+          <Route path="/choose-semester" element={<ChooseSemester />} />
            <Route path="/myuploads" element={<MyUploads/>} />
            <Route path="/edit/:id" element={<EditMaterial/>} />
            <Route path="/view/:id" element={<ViewMaterial/>}/>

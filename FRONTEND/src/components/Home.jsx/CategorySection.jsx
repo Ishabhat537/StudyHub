@@ -24,6 +24,10 @@ function CategorySection() {
     },
   ];
 
+   const handleCategoryClick = (type) => {
+  navigate(`/choose-semester?type=${type}`);
+};
+
   return (
     <div className="container py-5">
       <h2 className="text-center fw-bold mb-2">
@@ -48,7 +52,7 @@ function CategorySection() {
                 transition: "0.3s",
               }}
               onClick={() =>
-                navigate(`/materials?type=${category.type}`)
+                navigate(handleCategoryClick(category.type))
               }
             >
               <h1>{category.icon}</h1>

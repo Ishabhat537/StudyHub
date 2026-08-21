@@ -1,0 +1,183 @@
+.semester-page {
+  min-height: 80vh;
+  padding: 70px 20px;
+  background: #f4f8ff;
+}
+
+/* Header */
+
+.semester-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.semester-label {
+  color: #0d6efd;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.semester-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.semester-subtitle {
+  color: #64748b;
+  font-size: 17px;
+}
+
+.semester-subtitle strong {
+  color: #0d6efd;
+}
+
+/* Grid */
+
+.semester-grid {
+  max-width: 900px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* Card */
+
+.semester-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+
+  border: 1px solid #e2e8f0;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
+}
+
+.semester-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #0d6efd;
+
+  box-shadow: 0 12px 25px rgba(13, 110, 253, 0.15);
+}
+
+/* Number */
+
+.semester-number {
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #e8f1ff;
+  color: #0d6efd;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.semester-card h3 {
+  font-size: 18px;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.semester-card p {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Arrow */
+
+.semester-arrow {
+  display: block;
+
+  margin-top: 15px;
+
+  color: #0d6efd;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+/* Tablet */
+
+@media (max-width: 992px) {
+
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 650px;
+  }
+
+  .semester-header h1 {
+    font-size: 36px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+  .semester-page {
+    padding: 45px 18px;
+  }
+
+  .semester-header {
+    margin-bottom: 35px;
+  }
+
+  .semester-header h1 {
+    font-size: 30px;
+  }
+
+  .semester-subtitle {
+    font-size: 15px;
+  }
+
+  .semester-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .semester-card {
+    padding: 22px 12px;
+  }
+
+  .semester-number {
+    width: 48px;
+    height: 48px;
+    font-size: 19px;
+  }
+
+  .semester-card h3 {
+    font-size: 15px;
+  }
+
+  .semester-card p {
+    font-size: 12px;
+  }
+
+  .semester-arrow {
+    font-size: 18px;
+  }
+}
