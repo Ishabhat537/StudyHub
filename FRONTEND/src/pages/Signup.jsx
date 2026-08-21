@@ -34,47 +34,47 @@ function Signup() {
             });
         };
 
-        const handleSubmit=async(e)=>{
-            e.preventDefault();
-            try{
-                const {data}=await axios.post(`${API}/send-otp`,{
-                    ...inputValue,
-                },
-                {withCredentials:true}
-            );
-            const {success,message}=data;
-           if (success) {
-  handleSuccess(message);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  navigate("/verify-otp", {
-    state: {
-      email,
-    },
-  });
-}else{
-    handleError(message);
-}
+  try {
+    const { data } = await axios.post(
+      `${API}/signup`,
+      {
+        email,
+        username,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
-            }catch(err){
-                console.log(err);
-                  if (err.response) {
-    console.log("Status:", err.response.status);
-    console.log("Data:", err.response.data);
+    const { success, message } = data;
 
-    handleError(err.response.data.message);
-  } else {
-    console.log(err.message);
-    handleError(err.message);
+    if (success) {
+      handleSuccess(message);
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } else {
+      handleError(message);
+    }
+
+  } catch (err) {
+    console.log(err);
+
+    if (err.response) {
+      console.log("Status:", err.response.status);
+      console.log("Data:", err.response.data);
+
+      handleError(err.response.data.message);
+    } else {
+      handleError(err.message);
+    }
   }
-
-            }
-            setInputValue({
-                ...inputValue,
-                email:"",
-                username:"",
-                password:"",
-            });
-        };
+};
          
         
 

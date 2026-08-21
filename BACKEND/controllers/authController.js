@@ -6,43 +6,45 @@ const User = require("../models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
-// module.exports.Signup = async (req, res) => {
-//   try {
+module.exports.Signup = async (req, res) => {
+  try {
 
-//     const { email, username, password, createdAt } = req.body;
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.json({ success:false,message: "User already exists!" });
-//     }
+    const { email, username, password, createdAt } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.json({ success:false,message: "User already exists!" });
+    }
 
-//     if(!email || !username || !password){
-//    return res.json({
-//       success:false,
-//       message:"All fields are required!"
-//    });
-// }
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const user = await User.create({
-//       email,
-//       username,
-//       password: hashedPassword,
-//       createdAt,
-//     });
-//     const token = createSecretToken(user._id);
-//     res.cookie("token", token, {
-//        httpOnly: true,
-//   secure: true,
-//   sameSite: "None",
-//     });
+    if(!email || !username || !password){
+   return res.json({
+      success:false,
+      message:"All fields are required!"
+   });
+}
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({
+      email,
+      username,
+      password: hashedPassword,
+      createdAt,
+    });
+    const token = createSecretToken(user._id);
+    res.cookie("token", token, {
+       httpOnly: true,
+  secure: true,
+  sameSite: "None",
+    });
 
        
-//     res
-//       .status(201)
-//       .json({ message: "User signed in successfully", success: true, user });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+    res
+      .status(201)
+      .json({ message: "User signed in successfully", success: true, user });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 
 module.exports.Login = async (req, res) => {
   try {
@@ -130,186 +132,7 @@ module.exports.Login = async (req, res) => {
 // }
 // }
 
-module.exports.SendOtp = async (req, res) => {
-  try {
-    console.time("TOTAL SEND OTP");
 
-    const { email, username, password } = req.body;
-
-    if (!email || !username || !password) {
-      return res.json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
-
-
-    const existingUser = await User.findOne({ email });
-
-    console.timeEnd("USER CHECK");
-
-    if (existingUser) {
-      return res.json({
-        success: false,
-        message: "User already exists!",
-      });
-    }
-
-    //  Delete old OTP
-    console.time("DELETE OTP");
-
-    await OtpModel.deleteMany({ email });
-
-    console.timeEnd("DELETE OTP");
-
-    //  Hash password
-    console.time("BCRYPT");
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    console.timeEnd("BCRYPT");
-
-    //  Generate OTP
-    const otp = Math.floor(
-      100000 + Math.random() * 900000
-    ).toString();
-
-    //  Save OTP
-    console.time("SAVE OTP");
-
-    await OtpModel.create({
-      email,
-      username,
-      password: hashedPassword,
-      otp,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000),
-    });
-
-    console.timeEnd("SAVE OTP");
-
-    //  Send email
-    console.time("SEND EMAIL");
-
-    const { data, error } = await resend.emails.send({
-  from: "StudyHub <onboarding@resend.dev>",
-  to: email,
-  subject: "StudyHub Email Verification",
-  text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
-});
-
-// if (error) {
-//   console.log("Resend Error:", error);
-
-//   return res.status(500).json({
-//     success: false,
-//     message: "Failed to send OTP email.",
-//   });
-// }
-
-if (error) {
-  console.log("========== RESEND ERROR ==========");
-  console.log(error);
-  console.log("=================================");
-
-  return res.status(500).json({
-    success: false,
-    message: error.message || "Failed to send OTP email.",
-  });
-}
-
-console.log("Email sent:", data);
-
-    console.timeEnd("SEND EMAIL");
-
-   
-    console.timeEnd("TOTAL SEND OTP");
-
-    return res.json({
-      success: true,
-      message: "OTP sent successfully!",
-    });
-
-  } catch (err) {
-    console.error("SendOtp Error:", err);
-
-    return res.status(500).json({
-      success: false,
-      message: err.message,
-    });
-  }
-};
-
-module.exports.VerifyOtp = async (req, res) => {
-  try {
-    const { email, otp } = req.body;
-
-    if (!email || !otp) {
-      return res.json({
-        success: false,
-        message: "Email and OTP are required!",
-      });
-    }
-
-    const otpData = await OtpModel.findOne({ email });
-
-    if (!otpData) {
-      return res.json({
-        success: false,
-        message: "OTP expired or invalid!",
-      });
-    }
-
-  
-    if (otpData.expiresAt < new Date()) {
-  await OtpModel.deleteOne({ email });
-
-  return res.json({
-    success: false,
-    message: "OTP expired!",
-  });
-}
- if (otpData.otp !== otp) {
-      return res.json({
-        success: false,
-        message: "Incorrect OTP!",
-      });
-    }
-
-    // Create user
-    const user = await User.create({
-      email: otpData.email,
-      username: otpData.username,
-      password: otpData.password,
-      isVerified: true,
-    });
-
-    // Delete OTP
-    await OtpModel.deleteOne({ email });
-
-    // Generate JWT
-    const token = createSecretToken(user._id);
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-    });
-
-    return res.status(201).json({
-      success: true,
-      message: "Account created successfully!",
-      user,
-    });
-
-  } catch (err) {
-    console.log(err);
-
-    return res.json({
-      success: false,
-      message: "Something went wrong!",
-    });
-  }
-};
 
 module.exports.Logout=async(req,res)=>{
   res.clearCookie("token", {
