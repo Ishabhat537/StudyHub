@@ -1,6 +1,4 @@
 
-const OtpModel = require("../models/OtpModel");
-const resend = require("../config/resend");
 
 const User = require("../models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
