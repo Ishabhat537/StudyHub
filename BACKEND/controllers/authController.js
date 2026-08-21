@@ -197,12 +197,23 @@ module.exports.SendOtp = async (req, res) => {
   text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
 });
 
+// if (error) {
+//   console.log("Resend Error:", error);
+
+//   return res.status(500).json({
+//     success: false,
+//     message: "Failed to send OTP email.",
+//   });
+// }
+
 if (error) {
-  console.log("Resend Error:", error);
+  console.log("========== RESEND ERROR ==========");
+  console.log(error);
+  console.log("=================================");
 
   return res.status(500).json({
     success: false,
-    message: "Failed to send OTP email.",
+    message: error.message || "Failed to send OTP email.",
   });
 }
 
