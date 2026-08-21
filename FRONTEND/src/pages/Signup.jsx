@@ -25,7 +25,7 @@ function Signup() {
         };
         const handleError=(err)=>{
             toast.error(err,{
-                position:"botton-left",
+                position:"bottom-left",
             });
         }
         const handleSuccess=(msg)=>{
