@@ -14,11 +14,6 @@ const app=express();
 
 app.use(express.json());
 
-// app.use(cors({
-    // origin:["http://localhost:5173"," https://study-hub-seven-umber.vercel.app"
-    // ],
-    // credentials:true
-// }));
 
 
 app.use(cors({

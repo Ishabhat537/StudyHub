@@ -1,22 +1,19 @@
-import React from 'react';
 import HeroSection from './HeroSection';
-import StudyHub from './StudyHub';
-import Navbar from '../Navbar';
 import SemesterSection from './SemesterSection';
 import SubjectSection from './SubjectSection';
 import CategorySection from './CategorySection';
 import Testinomals from './Testinomals';
+import StudyHub from './StudyHub';
+import '../../styles/home.css';
 function HomePage() {
-    return ( <><div>
-        
+    return ( <main className="home-page">
         <HeroSection/>
         <SemesterSection/>
         <SubjectSection/>
         <CategorySection/>
         <StudyHub/>
         <Testinomals/>
-
-        </div></> );
+    </main> );
 }
 
 export default HomePage;

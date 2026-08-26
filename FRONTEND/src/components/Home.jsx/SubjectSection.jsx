@@ -50,35 +50,36 @@ function SubjectSection() {
   ];
 
   return (
-    <div className="container py-5">
-      <h2 className="text-center fw-bold mb-2">
+    <section className="home-section container subject-section">
+      <div className="section-heading text-center">
+      <p className="section-kicker">Build your toolkit</p>
+      <h2 className="section-title mb-2">
         Popular Subjects
       </h2>
 
       <p className="text-center text-muted mb-5">
         Explore materials by subject.
-      </p>
+      </p></div>
 
       <div className="row g-4">
         {subjects.map((subject) => (
           <div className="col-lg-3 col-md-4 col-6" key={subject.name}>
-            <div
-              className="card shadow-sm text-center p-4 h-100"
-              style={{ cursor: "pointer", borderRadius: "15px" }}
+            <button
+              className="subject-card text-center h-100"
               onClick={() =>
                 navigate(
                   `/materials?subject=${encodeURIComponent(subject.name)}`
                 )
               }
             >
-              <h1>{subject.icon}</h1>
+              <span className="subject-icon">{subject.icon}</span>
 
               <h6 className="mt-2">{subject.name}</h6>
-            </div>
+            </button>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

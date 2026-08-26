@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import "../styles/navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
 import { FaBook, FaFolderOpen, FaHeart, FaHome, FaUpload } from "react-icons/fa";
 function Navbar() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -59,11 +57,12 @@ const handleLogout=async()=>{
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
-        <div className="container-fluid">
-          <a className="navbar-brand ml-5" href="/">
-           <FaHome/> <img src={logo} style={{ height: "3rem", width: "6rem" }}></img>
-          </a>
+      <nav className="navbar navbar-expand-lg sticky-top">
+        <div className="container navbar-inner">
+          <Link className="navbar-brand" to="/" aria-label="StudyHub home">
+           <span className="brand-home-icon"><FaHome /></span>
+           <img src={logo} alt="StudyHub" />
+          </Link>
 <button
   className="navbar-toggler"
   type="button"
@@ -78,41 +77,43 @@ const handleLogout=async()=>{
 
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-5 text-center">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 text-center">
               <li className="nav-item ">
                 <Link className="nav-link " to="/materials">
                  <FaBook/> Materials
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link className="nav-link " to="/upload">
                 <FaUpload/>  Upload
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link fw-semibold" href="/myuploads">
+                <Link className="nav-link fw-semibold" to="/myuploads">
                 <FaFolderOpen/>  My Uploads
-                </a>
+                </Link>
               </li>
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <Link className="nav-link fw-semibold" to="/favourites">
+                   <FaHeart/> Favourites
+                  </Link>
+                </li>
+              )}
             </ul>
 
             {isLoggedIn ? (
               <>
-
-              <li className="nav-item">
-  <Link className="nav-link fw-semibold" to="/favourites">
-   My <FaHeart/>
-  </Link>
-</li>
 
               <div className="ms-lg-auto mt-3 mt-lg-0 d-flex justify-content-center">
 
               
 
   <button
-    className="btn btn-primary rounded-circle profile-btn dropdown-toggle d-flex align-items-center justify-content-center"
+    className="profile-btn dropdown-toggle d-flex align-items-center justify-content-center"
     type="button"
     data-bs-toggle="dropdown"
+    aria-label="Open account menu"
   >
    {user && user.username.charAt(0).toUpperCase()}
   </button>
@@ -146,7 +147,7 @@ const handleLogout=async()=>{
                   <Link to="/login" className="btn btn-outline-primary">
                     Login
                   </Link>
-                  <Link to="/signup" className="btn btn-primary">
+                  <Link to="/signup" className="btn btn-primary navbar-signup">
                     Signup
                   </Link>
                 </div>

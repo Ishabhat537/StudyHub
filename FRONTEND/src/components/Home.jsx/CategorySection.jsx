@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { FaFileAlt, FaClipboardList, FaFolderOpen } from "react-icons/fa";
 
 function CategorySection() {
   const navigate = useNavigate();
@@ -6,19 +7,19 @@ function CategorySection() {
   const categories = [
     {
       title: "Notes",
-      icon: "📄",
+      icon: <FaFileAlt />,
       description: "Study Notes",
       type: "Notes",
     },
     {
       title: "PYQs",
-      icon: "📝",
+      icon: <FaClipboardList />,
       description: "Previous Year Papers",
       type: "PYQ",
     },
     {
       title: "Assignments",
-      icon: "📂",
+      icon: <FaFolderOpen />,
       description: "College Assignments",
       type: "Assignment",
     },
@@ -29,14 +30,16 @@ function CategorySection() {
 };
 
   return (
-    <div className="container py-5">
-      <h2 className="text-center fw-bold mb-2">
+    <section className="home-section container category-section">
+      <div className="section-heading text-center">
+      <p className="section-kicker">Find your starting point</p>
+      <h2 className="section-title mb-2">
         Browse by Category
       </h2>
 
       <p className="text-center text-muted mb-5">
         Quickly find the type of material you need.
-      </p>
+      </p></div>
 
       <div className="row justify-content-center g-4">
 
@@ -44,18 +47,13 @@ function CategorySection() {
 
           <div className="col-lg-4 col-md-6" key={category.type}>
 
-            <div
-              className="card shadow-sm border-0 p-4 text-center h-100"
-              style={{
-                cursor: "pointer",
-                borderRadius: "15px",
-                transition: "0.3s",
-              }}
+            <button
+              className="browse-card category-card text-center h-100"
               onClick={() =>
                 handleCategoryClick(category.type)
               }
             >
-              <h1>{category.icon}</h1>
+              <span className="browse-card-icon">{category.icon}</span>
 
               <h4 className="mt-3">
                 {category.title}
@@ -65,14 +63,14 @@ function CategorySection() {
                 {category.description}
               </p>
 
-            </div>
+            </button>
 
           </div>
 
         ))}
 
       </div>
-    </div>
+    </section>
   );
 }
 

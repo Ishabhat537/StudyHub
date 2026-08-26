@@ -1,0 +1,68 @@
+.home-page {
+  --ink: #172033;
+  --muted: #667085;
+  --blue: #2563eb;
+  --blue-soft: #eaf1ff;
+  --line: #e6eaf1;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.home-section {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+.section-heading { margin-bottom: 2.5rem; }
+.section-kicker, .hero-kicker {
+  color: var(--blue);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.section-title { font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight: 800; letter-spacing: -.03em; }
+.section-description, .section-heading .text-muted { color: var(--muted) !important; }
+.browse-card, .semester-card, .subject-card {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  width: 100%;
+}
+.browse-card:hover, .browse-card:focus-visible, .semester-card:hover, .semester-card:focus-visible, .subject-card:hover, .subject-card:focus-visible {
+  border-color: #a9c3ff;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, .12);
+  outline: none;
+  transform: translateY(-4px);
+}
+.browse-card-icon, .subject-icon { align-items: center; background: var(--blue-soft); border-radius: 12px; color: var(--blue); display: inline-flex; font-size: 1.5rem; height: 3.3rem; justify-content: center; margin: 0 auto .9rem; width: 3.3rem; }
+.category-card { min-height: 190px; }
+.category-card h4, .subject-card h6, .semester-card h5 { font-weight: 750; }
+.category-card p { color: var(--muted); margin-bottom: 0; }
+.semester-card { align-items: flex-start; min-height: 150px; position: relative; text-align: left !important; }
+.semester-number { color: #b2bfd6; font-size: .8rem; font-weight: 800; letter-spacing: .08em; }
+.semester-icon { color: var(--blue); font-size: 1.35rem; margin: .65rem 0 .7rem; }
+.semester-card h5 { margin-bottom: 0; }
+.semester-arrow { color: #94a3b8; position: absolute; right: 1.25rem; top: 50%; }
+.subject-card { min-height: 150px; }
+.subject-icon { font-size: 1.35rem; height: 3rem; width: 3rem; }
+.feature-card { border-left: 3px solid #c9d9ff; padding: .5rem 1rem; }
+.feature-card h4 { font-size: 1.05rem; font-weight: 750; }
+.feature-card p { color: var(--muted); font-size: .92rem; line-height: 1.65; }
+.studyhub-section { background: #f4f7fc; max-width: none; padding-left: max(12px, calc((100% - 1140px) / 2)); padding-right: max(12px, calc((100% - 1140px) / 2)); }
+.testimonials-section { padding-bottom: 7rem; }
+
+@media (max-width: 576px) {
+  .home-section { padding-bottom: 3.5rem; padding-top: 3.5rem; }
+  .section-heading { margin-bottom: 1.75rem; }
+  .browse-card { min-height: 165px; padding: 1rem; }
+  .semester-card, .subject-card { padding: 1rem; }
+  .studyhub-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../styles/testinomals.css'
 import { FaStar } from 'react-icons/fa';
 function Testinomals() {
@@ -23,8 +22,8 @@ function Testinomals() {
   },
 ]
     return (
-     <div className="container py-5">
-      <h2 className="text-center fw-bold">What Students Say</h2>
+    <section className="home-section container testimonials-section">
+     <h2 className="section-title text-center">What students say</h2>
       <p className="text-center text-muted mb-5">
         Trusted by students for sharing and accessing study materials.
       </p>
@@ -54,7 +53,7 @@ function Testinomals() {
           </div>
         ))}
       </div>
-</div>
+</section>
      );
 }
 
