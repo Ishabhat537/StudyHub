@@ -12,7 +12,7 @@ import MyUploads from "./pages/MyUploads";
 import EditMaterial from "./pages/EditMaterial";
 import ViewMaterial from "./pages/ViewMaterial";
 import ChooseSemester from "./pages/ChooseSemester";
-
+import PageNotFound from "./components/PageNotFound";
 import Favourites from "./pages/Favourites";
 
 
@@ -32,6 +32,7 @@ function App() {
            <Route path="/view/:id" element={<ViewMaterial/>}/>
        
            <Route path="/favourites" element={<Favourites/>}/>
+           <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       <Footer/>
     </>
