@@ -6,13 +6,6 @@ module.exports.Signup = async (req, res) => {
   try {
     const { email, username, password } = req.body;
 
-    if (!email || !username || !password) {
-      return res.json({
-        success: false,
-        message: "All fields are required!",
-      });
-    }
-
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -57,9 +50,6 @@ module.exports.Signup = async (req, res) => {
 module.exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
-      return res.json({ success: false, message: "All fields are required!" });
-    }
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({ success: false, message: "User does not exist!" });

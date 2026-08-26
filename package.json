@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "joi": "^18.2.5",
     "nodemailer": "^9.0.3"
   }
 }
