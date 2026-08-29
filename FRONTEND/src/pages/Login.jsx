@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -6,9 +6,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 import "../styles/auth.css"
 import API from '../config';
+import { AuthContext } from '../context/AuthContext';
 function Login() {
 
         const navigate=useNavigate();
+        const {verifyUser}=useContext(AuthContext);
         const [inputValue,setInputValue]=useState({
             email:"",
             password:"",
@@ -44,8 +46,9 @@ function Login() {
             const {success,message}=data;
             if(success){
                 handleSuccess(message);
+                await verifyUser();
                 setTimeout(()=>{
-                    window.location.reload();
+                   
                     navigate("/upload");
                 },1000);
             }else{
