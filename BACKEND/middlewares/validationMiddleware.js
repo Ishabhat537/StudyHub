@@ -1,18 +1,4 @@
-const Joi = require("joi");
-
-// Signup validation schema
-const signupSchema = Joi.object({
-    email: Joi.string().email().required(),
-    username: Joi.string().min(3).required(),
-    password: Joi.string().min(6).required()
-});
-
-// Login validation schema
-const loginSchema = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
-});
-
+import {signupSchema,loginSchema,materialSchema} from "../joiSchema"
 // Signup validation middleware
 const validateSignup = (req, res, next) => {
     const { error } = signupSchema.validate(req.body);
@@ -40,8 +26,19 @@ const validateLogin = (req, res, next) => {
 
     next();
 };
+const validateMaterial=(req,res,next)=>{
+    const {error}=materialSchema.validate(req.body);
+    if(error){
+        return res.status(400).json({
+            success:false,
+            message:error.details[0].message
+        })
+    }
+    next();
+};
 
 module.exports = {
     validateSignup,
-    validateLogin
+    validateLogin,
+    validateMaterial,
 };

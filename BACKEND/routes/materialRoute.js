@@ -12,8 +12,11 @@ const {
   filterMaterials,
   downloadMaterial,
 } = require("../controllers/materialController");
+const {
+    validateMaterial
+} = require("../middlewares/validationMiddleware");
 
-router.post("/upload", authMiddleware, upload.single("file"), uploadMaterial);
+router.post("/upload", authMiddleware, upload.single("file"),validateMaterial, uploadMaterial);
 //router.get("/materials", getAllMaterials);
 router.get("/materials",filterMaterials);
 router.get("/materials/:id", getSingleMaterial);
